@@ -1,0 +1,65 @@
+SCUNet (Swin-Conv-UNet Image Denoising)
+=======================================
+
+File in this repository: scunet-v1.onnx
+
+Origin
+------
+ONNX export of the "scunet_color_real_gan" model, trained for real-world noise.
+
+  Original work:  https://github.com/cszn/SCUNet
+  ONNX export:    https://huggingface.co/Heliosoph/scunet-onnx
+                  (file scunet_color_real_gan.onnx)
+
+The export ships as two files - a small graph and a separate weight blob. The
+file in this repository is the same model with the weights folded back into a
+single file, because FerrumPix verifies one file per model against one
+checksum. The content is unchanged, but the SHA-256 differs from the source
+for that reason.
+
+License
+-------
+Apache License 2.0, Copyright 2022 Kai Zhang (cskaizhang@gmail.com,
+https://cszn.github.io/). The full license text is in LICENSE.Apache-2.0.txt
+in this folder.
+
+Apache-2.0 requires changes to be stated. The change here is the file format:
+the weights were folded back into the graph file, as described above. Nothing
+was retrained and no weight was altered.
+
+An earlier version of this notice said MIT and pointed at a licence text of
+that name. That was wrong - the MIT text belongs to other work by the same
+author, and the SCUNet repository carries Apache-2.0. The wrong file is gone.
+
+Paper
+-----
+Zhang et al., "Practical Blind Denoising via Swin-Conv-UNet and Data
+Synthesis", Machine Intelligence Research 2023.
+
+Model contract
+--------------
+  Input  "image"     float32 [batch, 3, H, W]  RGB, values 0..1
+  Output "denoised"  float32 [batch, 3, H, W]  RGB, values 0..1
+
+H and W are free in the graph, but they MUST be multiples of 64: the model
+splits its input into windows and halves it several times, and a crop of, say,
+480 points aborts inside the model with a reshape error that does not name the
+cause. FerrumPix therefore keeps every tile at a fixed edge length and shifts
+it inward at the image border instead of cropping it.
+
+There is no strength parameter - the model always denoises fully. Blending the
+result against the original is the caller's job.
+
+Cost
+----
+Measured on a 24-core CPU: about 17 seconds per megapixel, so a 12-megapixel
+photo takes close to four minutes. That is a property of the model, not of the
+code around it.
+
+There is a second, much faster denoising model in this repository -
+nafnet-v1.onnx, about six times quicker and a little smoother. Neither
+replaces the other; NOTICE-nafnet.txt has the comparison.
+
+The SHA-256 in SHA256SUMS.txt identifies exactly this export. FerrumPix checks
+every file it fetches against the checksum it carries, so a file that does not
+match is fetched again instead of being used.

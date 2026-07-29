@@ -1,0 +1,20 @@
+# Die Modelldateien gehoeren NICHT in den Quellbaum, sondern an ein Release.
+#
+# Zwei Gruende. Erstens waechst ein Git-Baum mit jeder Fassung dauerhaft: die alte
+# Datei bleibt in der Historie, auch wenn sie ersetzt wird - bei rund 100 MB je
+# Runde ist das Repository nach wenigen Modellwechseln unbenutzbar gross.
+# Zweitens warnt GitHub ab 50 MB je Datei und lehnt ab 100 MB ganz ab.
+#
+# Sie liegen hier trotzdem im Arbeitsordner, damit sie sich von hier aus an ein
+# Release haengen lassen.
+*.onnx
+*.onnx.unvollstaendig
+
+# Dasselbe gilt fuer die Ortstabelle: sie ist zwar kein Modell, aber genauso gross
+# und wird genauso ersetzt statt geaendert - eine neue Fassung waere sonst eine
+# weitere Kopie in der Historie.
+*.sqlite
+
+# Wird fuer das Release gepackt, gehoert nicht in den Baum - der Ordner licenses ist dort.
+licenses.zip
+RELEASE-modelle-v1.md

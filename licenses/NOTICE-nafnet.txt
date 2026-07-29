@@ -1,0 +1,73 @@
+NAFNet (Nonlinear Activation Free Network)
+==========================================
+
+File in this repository: nafnet-v1.onnx
+
+Origin
+------
+ONNX export of the "NAFNet-SIDD-width32" model, trained on real camera noise
+(the SIDD dataset).
+
+  Original work:  https://github.com/megvii-research/NAFNet
+  Weights:        NAFNet-SIDD-width32, the checkpoint the upstream README
+                  names for real-image denoising (29.2 million weights)
+  ONNX export:    done for FerrumPix from that checkpoint, with PyTorch
+                  2.13 - no retraining and no change to the weights
+
+The export is one single file: the weights are inside it, not in a companion
+file next to it. FerrumPix verifies one file per model against one checksum,
+and a model whose weights sit beside it does not fit that contract.
+
+License
+-------
+MIT, Copyright (c) 2022 megvii-model. The full license text is in
+LICENSE.MIT.nafnet.txt in this folder.
+
+That file carries a second licence after the MIT text: NAFNet builds on
+BasicSR (Copyright 2018-2020 BasicSR Authors), which is Apache-2.0, and the
+upstream project ships both texts in one file. Whoever passes this model on
+passes on both.
+
+Paper
+-----
+Chen et al., "Simple Baselines for Image Restoration", ECCV 2022.
+
+Model contract
+--------------
+  Input   "input"    float32 [batch, 3, H, W]  RGB, values 0..1
+  Output  the first  float32 [batch, 3, H, W]  RGB, values 0..1
+
+The graph has exactly one output, and FerrumPix reads it by position rather
+than by name.
+
+H and W are free in the graph, but they MUST be multiples of 64: the network
+halves its input several times on the way down, and a crop that does not
+divide evenly aborts inside the model with a reshape error that does not name
+the cause. FerrumPix therefore keeps every tile at a fixed edge length and
+shifts it inward at the image border instead of cropping it - the same
+handling as for scunet-v1.onnx.
+
+There is no strength parameter - the model always denoises fully. Blending the
+result against the original is the caller's job.
+
+Why both denoising models are here
+----------------------------------
+They do the same job at different prices, and neither replaces the other.
+Measured on the same two crops - a high-rise facade at night and a high-ISO
+interior - both take about the same amount of noise away, but they leave a
+different amount of the picture standing: of the faint drawing, where the
+difference is decided, SCUNet keeps around three quarters and NAFNet a little
+over half. NAFNet pays for that with speed: it runs roughly six times faster,
+so a photo that takes minutes with SCUNet is done in well under one.
+
+Turning SCUNet down does not turn it into NAFNet, and turning NAFNet up does
+not turn it into SCUNet. Whoever has the time takes SCUNet.
+
+Cost
+----
+Measured on a 24-core CPU: about 3 seconds per megapixel, against about 17 for
+SCUNet. That is a property of the model, not of the code around it.
+
+The SHA-256 in SHA256SUMS.txt identifies exactly this export. FerrumPix checks
+every file it fetches against the checksum it carries, so a file that does not
+match is fetched again instead of being used.

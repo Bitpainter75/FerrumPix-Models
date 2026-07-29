@@ -1,0 +1,58 @@
+Real-ESRGAN (enlarging with a learned model)
+============================================
+
+Files in this repository:
+
+  realesrgan-x4-v1.onnx           four times, thorough      (RealESRGAN_x4plus)
+  realesrgan-x2-v1.onnx           twice, thorough           (RealESRGAN_x2plus)
+  realesrgan-fast-x4-v1.onnx      four times, quick         (realesr-general-x4v3)
+  realesrgan-fast-wdn-x4-v1.onnx  four times, quick + denoise (realesr-general-wdn-x4v3)
+  realesrgan-anime-x4-v1.onnx     four times, for drawings  (RealESRGAN_x4plus_anime_6B)
+
+Origin
+------
+All five come from the author's own releases, and each was exported to ONNX here
+from those weights - not taken as a ready-made file from a third party.
+
+  Original work:  https://github.com/xinntao/Real-ESRGAN
+  Weights:        https://github.com/xinntao/Real-ESRGAN/releases
+                  RealESRGAN_x4plus.pth
+                    sha256 4fa0d38905f75ac06eb49a7951b426670021be3018265fd191d2125df9d682f1
+                  RealESRGAN_x2plus.pth
+                    sha256 49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb
+                  realesr-general-x4v3.pth
+                    sha256 8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292
+                  realesr-general-wdn-x4v3.pth and RealESRGAN_x4plus_anime_6B.pth
+                    from the same releases
+  Architecture:   rrdbnet_arch.py and arch_util.py from BasicSR, srvgg_arch.py
+                  from Real-ESRGAN itself
+  ONNX export:    done for FerrumPix with PyTorch 2.13, opset 17, dynamic height
+                  and width - no retraining and no change to the weights
+
+Two things the export has to get right, and both are easy to get wrong:
+
+  - The weights load with strict=True. A tensor that has no counterpart keeps
+    its initial value, and the export then quietly computes something else.
+  - The OUTPUT axes get their own names, separate from the input ones. An
+    enlarger produces two or four times the size; giving both the same name
+    makes the runtime treat them as equal, and it reuses a buffer of the wrong
+    size. On the processor this is invisible - the result is correct - while on
+    the graphics card it fails with "Shape mismatch attempting to re-use
+    buffer". A ready-made file found on Hugging Face carries exactly this
+    defect.
+
+Verification
+------------
+Each export was checked against the original in PyTorch: largest deviation per
+pixel between 1.9e-06 and 1.9e-05, which is floating point rounding. For the two
+models where a third-party ONNX file was available for comparison, ours computes
+bit for bit the same (deviation 0.0) - except for the file labelled
+"realesr-general-x4v3", which turned out to be a different model altogether.
+
+Each export is one single file: the weights are inside it, not in a companion
+file next to it.
+
+License
+-------
+BSD 3-Clause, Copyright (c) 2021 Xintao Wang. The full license text is in
+LICENSE.BSD-3-Clause.realesrgan.txt in this folder.

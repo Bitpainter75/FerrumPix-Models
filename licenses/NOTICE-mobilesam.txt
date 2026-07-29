@@ -1,0 +1,33 @@
+MobileSAM - Modelldateien fuer die Objektauswahl per Klick
+==========================================================
+
+Enthalten:  mobilesam-encoder-v1.onnx, mobilesam-decoder-v1.onnx
+
+Herkunft
+--------
+Projekt:    MobileSAM, https://github.com/ChaoningZhang/MobileSAM
+Gewichte:   weights/mobile_sam.pt aus demselben Projekt
+Lizenz:     Apache License 2.0 (Volltext in LICENSE.Apache-2.0.txt)
+
+Urheberrechtsvermerke, die mit diesen Dateien weitergegeben werden
+------------------------------------------------------------------
+Copyright (c) Meta Platforms, Inc. and affiliates.
+  Segment Anything - Prompt-Kodierer, Maskendekodierer und Transformer.
+  https://github.com/facebookresearch/segment-anything
+
+Copyright (c) 2022 Microsoft
+  TinyViT - der Bildkodierer. Urspruenglich unter der MIT-Lizenz
+  veroeffentlicht (microsoft/Cream/TinyViT) und im MobileSAM-Projekt unter
+  Apache 2.0 weitergegeben.
+
+Aenderungen gegenueber dem Original
+-----------------------------------
+Die Gewichte wurden unveraendert nach ONNX exportiert (torch.onnx.export,
+Opset 17, ohne Quantisierung). Es wurde nicht nachtrainiert und nichts an den
+Gewichten veraendert. Der Export wurde gegen die urspruengliche Fassung
+geprueft; groesste Abweichung des Kodierers 2,74e-06.
+
+Gewaehrleistung
+---------------
+Diese Dateien werden ohne Gewaehrleistung weitergegeben ("AS IS"), siehe
+Abschnitt 7 und 8 des Lizenztextes.

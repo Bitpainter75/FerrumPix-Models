@@ -1,0 +1,63 @@
+LaMa (Large Mask Inpainting)
+============================
+
+File in this repository: lama-v1.onnx
+
+Origin
+------
+ONNX export of the "big-lama" model, with free input sizes.
+
+  Original work:  https://github.com/advimman/lama
+  Weights:        https://huggingface.co/smartywu/big-lama
+                  (the download named in the upstream README as
+                  "The best model (Places2, Places Challenge)")
+  ONNX export:    https://huggingface.co/g-ronimo/lama
+                  (file lama_fp16.onnx, byte-identical)
+
+The file in this repository is a renamed copy. Its content is unchanged, so
+its SHA-256 matches the one published at the source.
+
+License
+-------
+Apache License 2.0. The full license text is in LICENSE.Apache-2.0.txt in this
+folder.
+
+That is the licence of the project. The weights are worth a separate sentence,
+because the two are not automatically the same question: LaMa states no separate
+condition for them. The checkpoint is the one its own README points at, offered
+without a carve-out - unlike projects that release their code freely and restrict
+their trained models on top. InsightFace does exactly that, which is why ArcFace
+is not in this collection at all (see NOTICE-arcface.txt). Absent such a
+carve-out, the project licence is what there is to go by.
+
+Paper
+-----
+Suvorov et al., "Resolution-robust Large Mask Inpainting with Fourier
+Convolutions", WACV 2022.
+
+Model contract
+--------------
+  Input  "input"   float32 [1, 4, H, W]
+                   channels 0..2: the image with the gap ERASED (image * (1 - mask)), values 0..1
+                   channel  3:    the mask, 0 or 1, where 1 marks the area to fill
+  Output "output"  float32 [1, 3, H, W]  values 0..1
+
+H and W are free; they have to be multiples of 32. The output is the raw
+generator output over the whole crop - compositing it back through the mask is
+the caller's job.
+
+Why this model
+--------------
+LaMa uses Fourier convolutions and therefore sees the whole crop at once,
+which lets it recognise a repetition and carry it on: facade grids, window
+rows, tiling, fences. That is the case the patch-copying methods cannot do -
+they need a matching piece to borrow, and a horizon or a window grid has none.
+
+A smaller alternative with a local view was measured against it and not
+adopted: quicker, and better on open ground like grass or gravel, but it left
+wavy smears exactly where LaMa carries a structure through. Filling a gap is
+the harder half, so the model that gets structure right is the one that ships.
+
+The SHA-256 in SHA256SUMS.txt identifies exactly this export. FerrumPix checks
+every file it fetches against the checksum it carries, so a file that does not
+match is fetched again instead of being used.

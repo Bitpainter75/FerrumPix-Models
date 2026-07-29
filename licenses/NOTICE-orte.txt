@@ -1,0 +1,42 @@
+Ortsnamen - Nachschlagetabelle fuer Koordinaten
+==============================================
+
+Enthalten:  orte-v1.sqlite
+
+Herkunft
+--------
+Projekt:    GeoNames, https://www.geonames.org/
+Quelldatei: cities1000.zip und countryInfo.txt aus
+            https://download.geonames.org/export/dump/
+Lizenz:     Creative Commons Attribution 4.0 (CC BY 4.0)
+            https://creativecommons.org/licenses/by/4.0/
+
+Namensnennung, die mit dieser Datei weitergegeben wird
+-------------------------------------------------------
+This work is based on data from GeoNames (https://www.geonames.org/),
+licensed under CC BY 4.0.
+
+Aenderungen gegenueber dem Original
+-----------------------------------
+Die beiden Textdateien wurden in eine SQLite-Datenbank umgesetzt und dabei auf
+die Felder gekuerzt, die zum Nachschlagen gebraucht werden: Ortsname,
+Laenderkuerzel, Laendername, Breite, Laenge, Einwohnerzahl. Aus countryInfo.txt
+kam nur der Laendername dazu. Es wurden KEINE Orte hinzugefuegt, entfernt oder
+in ihren Werten veraendert; die Auswahl ist genau die von cities1000, also alle
+Orte ab 1000 Einwohnern sowie Verwaltungssitze.
+
+Bestand: 170540 Orte, 252 Laender.
+
+Was die Datei liefert
+---------------------
+Zu einem Koordinatenpaar den naechstgelegenen Ort. Sie kennt keine Adressen,
+keine Strassen und keine Hausnummern - nur Orte. Ein Foto mitten auf dem Meer
+bekommt deshalb bewusst KEINEN Namen: der naechste Ort waere dort ueber tausend
+Kilometer entfernt und die Angabe schlicht falsch.
+
+Nachgeschlagen wird ausschliesslich auf diesem Geraet. Es geht dabei nichts nach
+draussen - genau dafuer liegt die Tabelle ueberhaupt hier.
+
+Gewaehrleistung
+---------------
+Diese Datei wird ohne Gewaehrleistung weitergegeben ("AS IS"), siehe Lizenztext.

@@ -1,0 +1,71 @@
+Modelldateien und ihre Lizenzen
+===============================
+
+Die Modelldateien gehoeren NICHT zu FerrumPix. Sie stammen aus fremden Projekten
+und stehen unter deren Lizenzen - nicht unter der GPL, unter der FerrumPix
+selbst steht. Diese Texte gehoeren zu ihnen und muessen mit ihnen weitergegeben
+werden, egal wo sie herkommen:
+
+  mobilesam-encoder-v1.onnx   Apache-2.0   LICENSE.Apache-2.0.txt
+  mobilesam-decoder-v1.onnx                NOTICE-mobilesam.txt
+
+  midas-small-v1.onnx         MIT          LICENSE.MIT.midas.txt
+                                           NOTICE-midas.txt
+
+  lama-v1.onnx                Apache-2.0   LICENSE.Apache-2.0.txt
+                                           NOTICE-lama.txt
+
+  scunet-v1.onnx              Apache-2.0   LICENSE.Apache-2.0.txt
+                                           NOTICE-scunet.txt
+
+  nafnet-v1.onnx              MIT          LICENSE.MIT.nafnet.txt
+                                           NOTICE-nafnet.txt
+
+  realesrgan-x4-v1.onnx       BSD-3-Clause LICENSE.BSD-3-Clause.realesrgan.txt
+  realesrgan-x2-v1.onnx                    NOTICE-realesrgan.txt
+  realesrgan-fast-x4-v1.onnx
+  realesrgan-fast-wdn-x4-v1.onnx
+  realesrgan-anime-x4-v1.onnx
+
+  yunet-v1.onnx               MIT          LICENSE.MIT.yunet.txt
+                                           NOTICE-yunet.txt
+
+  arcface-r100-v1.onnx        NICHT hier   NOTICE-arcface.txt
+
+  orte-v1.sqlite              CC BY 4.0    LICENSE.CC-BY-4.0.txt
+                                           NOTICE-orte.txt
+
+arcface-r100-v1.onnx liegt NICHT in dieser Sammlung und wird auch nicht mit ihr
+weitergegeben. FerrumPix holt die Datei beim Herausgeber. Der Grund steht in
+NOTICE-arcface.txt: der ONNX Model Zoo stellt sie unter die Apache-2.0 seines
+Repos, die Gewichte stammen aber von InsightFace, und dort sind die
+vortrainierten Modelle auf nicht-kommerzielle Forschung beschraenkt. Der Hinweis
+bleibt hier, damit nachlesbar ist, woher die Datei stammt und was fuer sie gilt.
+
+Die Ortstabelle ist KEIN gelerntes Modell, sondern eine Nachschlagetabelle. Sie
+steht hier, weil sie denselben Weg geht: auf Knopfdruck geholt, gegen eine
+Pruefsumme geprueft, und ohne sie bleibt die Funktion aus.
+
+Die beiden Personen-Dateien stammen aus verschiedenen Sammlungen und stehen unter
+verschiedenen Bedingungen, obwohl sie nur gemeinsam etwas nuetzen. yunet steht
+unter MIT aus dem OpenCV Model Zoo und liegt hier. ArcFace liegt NICHT hier - was
+fuer diese Datei gilt, steht in NOTICE-arcface.txt.
+
+Die Lizenzdatei von nafnet traegt ZWEI Texte: MIT fuer NAFNet selbst und
+dahinter Apache-2.0 fuer BasicSR, auf dem es aufbaut. Das ist beim
+Originalprojekt so und bleibt so - wer die Datei weitergibt, gibt beide Texte
+weiter.
+
+Alle Lizenzen hier erlauben die Weitergabe ausdruecklich. Gemeinsam verlangen sie,
+dass der Lizenztext und die Urheberrechtsvermerke mitgehen.
+
+Das Nennen von Aenderungen verlangen NICHT alle, sondern Apache-2.0 (Abschnitt 4b)
+und CC BY 4.0; MIT und BSD-3-Clause tun es nicht. Die NOTICE-Dateien halten es
+trotzdem fuer jede Datei fest - was nicht verlangt ist, schadet dort nicht, und
+so steht ueberall dasselbe. CC BY verlangt zusaetzlich, die Quelle zu nennen.
+
+Diese Texte gehen mit den MODELLDATEIEN, nicht mit der Anwendung: sie liegen als
+licenses.zip in derselben Veroeffentlichung, aus der die Modelle geholt werden.
+Das Anwendungspaket selbst traegt keine Modelldatei und deshalb auch nicht deren
+Lizenztexte - dort steht in THIRD-PARTY-NOTICES.txt nur, welches Modell unter
+welcher Lizenz steht und wo es liegt.

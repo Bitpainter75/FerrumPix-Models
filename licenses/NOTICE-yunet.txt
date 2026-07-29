@@ -1,0 +1,38 @@
+YuNet - Modelldatei fuer das Finden von Gesichtern
+==================================================
+
+Enthalten:  yunet-v1.onnx
+
+Herkunft
+--------
+Projekt:    OpenCV Model Zoo, https://github.com/opencv/opencv_zoo
+Verzeichnis: models/face_detection_yunet
+Datei:      face_detection_yunet_2023mar.onnx
+Lizenz:     MIT (Volltext in LICENSE.MIT.yunet.txt)
+
+Das Modell selbst stammt aus der Arbeit an libfacedetection
+(https://github.com/ShiqiYu/libfacedetection) und wird im OpenCV Model Zoo
+unter MIT weitergegeben.
+
+Urheberrechtsvermerk, der mit dieser Datei weitergegeben wird
+--------------------------------------------------------------
+Copyright (c) 2020 Shiqi Yu <shiqi.yu@gmail.com>
+
+Aenderungen gegenueber dem Original
+-----------------------------------
+Keine. Die Datei wurde unveraendert uebernommen und nur umbenannt, damit die
+Fassung im Namen steht (Namensschema dieser Sammlung). Es wurde nicht
+nachtrainiert und nichts an den Gewichten veraendert.
+
+Was das Modell liefert
+----------------------
+Rechtecke um Gesichter, dazu fuenf Punkte je Gesicht (beide Augen, Nasenspitze,
+beide Mundwinkel) und einen Wert dafuer, wie sicher es sich ist. Es sagt NICHT,
+WER zu sehen ist - dafuer ist die zweite Datei da (arcface-r100-v1.onnx).
+
+Es rechnet auf einem festen Quadrat von 640 Punkten. Ein Gesicht, das im
+verkleinerten Bild kleiner als etwa zehn Punkte wird, findet es nicht mehr.
+
+Gewaehrleistung
+---------------
+Diese Datei wird ohne Gewaehrleistung weitergegeben ("AS IS"), siehe Lizenztext.

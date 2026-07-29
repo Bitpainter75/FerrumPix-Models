@@ -1,0 +1,81 @@
+ArcFace ResNet100 - Modelldatei fuer das Vergleichen von Gesichtern
+==================================================================
+
+NICHT enthalten: arcface-r100-v1.onnx wird mit dieser Sammlung NICHT
+                 weitergegeben. FerrumPix holt die Datei beim Herausgeber, unter
+                 der unten genannten Adresse. Dieser Hinweis bleibt hier, damit
+                 Herkunft und Bedingungen nachlesbar sind.
+
+Herkunft
+--------
+Projekt:    ONNX Model Zoo, https://github.com/onnx/models
+Modell:     ArcFace (LResNet100E-IR)
+Datei:      arcfaceresnet100-8.onnx
+Bezogen von: https://huggingface.co/onnxmodelzoo/arcfaceresnet100-8
+Lizenz:     UNGEKLAERT, siehe "Zu den Bedingungen" weiter unten. Der ONNX Model
+            Zoo stellt die Datei unter die Apache-2.0 seines Repos; die Gewichte
+            stammen aber von InsightFace und sind dort beschraenkt.
+
+Das Verfahren stammt aus "ArcFace: Additive Angular Margin Loss for Deep Face
+Recognition" (Deng, Guo, Xue, Zafeiriou). Die ONNX-Fassung wurde aus dem
+urspruenglichen MXNet-Modell umgewandelt und liegt im ONNX Model Zoo.
+
+Zum Dateinamen
+--------------
+FerrumPix erwartet die Datei unter dem Namen arcface-r100-v1.onnx, nach dem
+Namensschema dieser Sammlung. Geholt wird sie als arcfaceresnet100-8.onnx und
+beim Ablegen umbenannt; am Inhalt aendert sich dabei nichts, und Groesse wie
+Pruefsumme werden danach geprueft.
+
+Was das Modell liefert
+----------------------
+Zu einem ausgeschnittenen und ausgerichteten Gesicht eine Reihe von 512 Zahlen.
+Zwei Aufnahmen DERSELBEN Person ergeben aehnliche Reihen, zwei verschiedene
+Personen unaehnliche. Verglichen wird ueber den Kosinus zwischen beiden Reihen.
+
+Erwartet wird ein Ausschnitt von 112 mal 112 Punkten in RGB, ausgerichtet an den
+fuenf Gesichtspunkten (Augen, Nasenspitze, Mundwinkel) auf die uebliche
+ArcFace-Vorlage. Die Umrechnung der Werte steckt im Modell selbst; roh
+uebergebene Bildpunkte von 0 bis 255 sind richtig.
+
+Es ist kein Namensschild: das Modell weiss nicht, WER jemand ist. Es sagt nur,
+ob zwei Gesichter zusammengehoeren. Namen vergibt allein der Benutzer.
+
+Zu den Bedingungen
+------------------
+Der ONNX Model Zoo veroeffentlicht die Datei unter der Apache-2.0 seines eigenen
+Repos. Die Gewichte stammen jedoch von InsightFace, und dort heisst es woertlich:
+
+  "The code of InsightFace is released under the MIT License. There is no
+   limitation for both academic and commercial usage."
+
+  "The training data containing the annotation (and the models trained with
+   these data) are available for non-commercial research purposes only."
+
+  "Both manual-downloading models from our github repo and auto-downloading
+   models with our python-library follow the above license policy (which is for
+   non-commercial research purposes only)."
+
+Die MIT-Lizenz des Projekts betrifft nach diesem Wortlaut den Code; fuer die
+vortrainierten Modelle nennt InsightFace eine eigene, engere Bedingung. Der Model
+Zoo wiederholt sie nicht.
+
+Wie hier damit umgegangen wird - eine Entscheidung, keine Rechtsauskunft: die
+Datei wird nicht mit dieser Sammlung weitergegeben. FerrumPix steht unter der
+GPL-3, die jedem Empfaenger auch die kommerzielle Nutzung zusichert; eine Datei
+mitzuliefern, deren Herausgeber genau das ausschliesst, waere zumindest
+widerspruechlich. Statt diese Frage auszudeuten, wird sie vermieden: wer die
+Datei holt, holt sie beim Herausgeber. Was fuer seine Nutzung gilt, steht oben
+im Wortlaut und ist zwischen ihm und InsightFace zu klaeren. Wer es genau wissen
+muss, fragt dort nach oder holt Rechtsrat ein - dieser Text kann beides nicht
+ersetzen.
+
+Erfragen laesst sich eine Erlaubnis unter recognition-oss-pack@insightface.ai.
+Immich hat auf diesem Weg 2023 eine erhalten und schreibt in seiner
+machine-learning/README.md ausdruecklich dazu, dass sie nicht auf Dritte
+uebergeht.
+
+Gewaehrleistung
+---------------
+Fuer diese Datei wird keine Gewaehrleistung uebernommen. Sie wird hier nicht
+weitergegeben; auch die Angaben oben stehen ohne Gewaehr.
