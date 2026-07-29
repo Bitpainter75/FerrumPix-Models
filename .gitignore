@@ -1,0 +1,11 @@
+# Die Modelldateien gehoeren NICHT in den Quellbaum, sondern an ein Release.
+#
+# Zwei Gruende. Erstens waechst ein Git-Baum mit jeder Fassung dauerhaft: die alte
+# Datei bleibt in der Historie, auch wenn sie ersetzt wird - bei rund 100 MB je
+# Runde ist das Repository nach wenigen Modellwechseln unbenutzbar gross.
+# Zweitens warnt GitHub ab 50 MB je Datei und lehnt ab 100 MB ganz ab.
+#
+# Sie liegen hier trotzdem im Arbeitsordner, damit sie sich von hier aus an ein
+# Release haengen lassen.
+*.onnx
+*.onnx.unvollstaendig

@@ -1,0 +1,21 @@
+Modelldateien und ihre Lizenzen
+===============================
+
+Die Modelldateien gehoeren NICHT zu FerrumPix. Sie stammen aus fremden Projekten
+und stehen unter deren Lizenzen - nicht unter der GPL, unter der FerrumPix
+selbst steht. Diese Texte gehoeren zu ihnen und muessen mit ihnen weitergegeben
+werden, egal wo sie herkommen:
+
+  mobilesam-encoder-v1.onnx   Apache-2.0   LICENSE.Apache-2.0.txt
+  mobilesam-decoder-v1.onnx                NOTICE-mobilesam.txt
+
+  midas-small-v1.onnx         MIT          LICENSE.MIT.midas.txt
+                                           NOTICE-midas.txt
+
+Beide Lizenzen erlauben die Weitergabe ausdruecklich. Verlangt wird, dass der
+Lizenztext und die Urheberrechtsvermerke mitgehen und dass Aenderungen genannt
+werden - hier: die unveraenderte Umwandlung nach ONNX. Beides steht in den
+NOTICE-Dateien.
+
+Diese Texte liegen bei der Anwendung, damit sie auch dann vorhanden sind, wenn
+die Modelle spaeter ueber den Knopf in den Einstellungen geholt werden.

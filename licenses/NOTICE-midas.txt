@@ -1,0 +1,30 @@
+MiDaS - Modelldatei fuer die Tiefenkarte
+========================================
+
+Enthalten:  midas-small-v1.onnx
+
+Herkunft
+--------
+Projekt:    MiDaS, https://github.com/isl-org/MiDaS
+Gewichte:   midas_v21_small_256.pt (Release v2_1) aus demselben Projekt
+Lizenz:     MIT (Volltext in LICENSE.MIT.midas.txt)
+
+Urheberrechtsvermerk, der mit dieser Datei weitergegeben wird
+--------------------------------------------------------------
+Copyright (c) 2019 Intel ISL (Intel Intelligent Systems Lab)
+
+Aenderungen gegenueber dem Original
+-----------------------------------
+Die Gewichte wurden unveraendert nach ONNX exportiert (torch.onnx.export,
+Opset 17, ohne Quantisierung). Es wurde nicht nachtrainiert und nichts an den
+Gewichten veraendert. Der Export wurde gegen die urspruengliche Fassung
+geprueft; Abweichung 1,94e-06 bezogen auf die Wertespanne der Ausgabe.
+
+Was das Modell liefert
+----------------------
+RELATIVE Tiefe, keine Meter. Es weiss nicht, wie gross die Szene ist - nur, was
+naeher und was weiter ist.
+
+Gewaehrleistung
+---------------
+Diese Datei wird ohne Gewaehrleistung weitergegeben ("AS IS"), siehe Lizenztext.
