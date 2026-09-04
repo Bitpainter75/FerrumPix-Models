@@ -28,6 +28,25 @@ licence of the project it came from:
 | `yunet-v1.onnx` | [OpenCV Model Zoo](https://github.com/opencv/opencv_zoo) | MIT | `licenses/LICENSE.MIT.yunet.txt`, `licenses/NOTICE-yunet.txt` |
 | `orte-v1.sqlite` | [GeoNames](https://www.geonames.org/) | CC BY 4.0 | `licenses/LICENSE.CC-BY-4.0.txt`, `licenses/NOTICE-orte.txt` |
 
+### RAM++ image tagging is downloaded from its publisher
+
+The automatic image-tagging model is deliberately **not** stored in this Git
+repository or in its releases. `ram_plus_int8.onnx` is 873 MB on its own, so
+keeping it here would make ordinary source clones and release downloads
+unnecessarily large. FerrumPix instead fetches the following, version-pinned
+files directly from the publisher when the user explicitly requests the model:
+
+| File installed by FerrumPix | Publisher file | Origin | Licence | Notice |
+|---|---|---|---|---|
+| `ram-plus-int8-v1.onnx` | `ram_plus_int8.onnx` | [anakhiu/ram-plus-onnx-int8](https://huggingface.co/anakhiu/ram-plus-onnx-int8/tree/f5226bd4d7667a08fe475b95dcf0be66c86aa4fb) | Apache-2.0 | `licenses/NOTICE-ram-plus.txt` |
+| `ram-plus-tags-v1.txt` | `ram_tag_list.txt` | same release | Apache-2.0 | `licenses/NOTICE-ram-plus.txt` |
+| `ram-plus-thresholds-v1.txt` | `ram_tag_list_threshold.txt` | same release | Apache-2.0 | `licenses/NOTICE-ram-plus.txt` |
+
+The files remain at their publisher; they are not redistributed from this
+repository. The full Apache-2.0 text is `licenses/LICENSE.Apache-2.0.txt`; the
+notice records the original RAM++ weights, the ONNX export and the INT8
+conversion chain.
+
 ## ArcFace is *not* in this collection
 
 `arcface-r100-v1.onnx`, the model that compares faces, is **not** part of these releases.
@@ -148,6 +167,7 @@ checks their checksum.
 | Enlarge a drawing | `realesrgan-anime-x4-v1.onnx` | 17 MiB |
 | Find people and group them | `yunet-v1.onnx` from here, plus `arcface-r100-v1.onnx` from its publisher | 249 MiB |
 | Name the place a photo was taken | `orte-v1.sqlite` | 12 MiB |
+| Create automatic image tags | RAM++ downloaded from its publisher: model, tag list and thresholds | 873 MiB |
 
 They are independent of one another: if you only want the object selection, fetch
 only its two files. When a piece is missing, the matching controls in FerrumPix are not

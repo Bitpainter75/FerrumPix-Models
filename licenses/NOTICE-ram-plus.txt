@@ -1,0 +1,45 @@
+RAM++ (Recognize Anything Plus) — automatic image tagging
+===========================================================
+
+Files installed by FerrumPix
+----------------------------
+  ram-plus-int8-v1.onnx
+  ram-plus-tags-v1.txt
+  ram-plus-thresholds-v1.txt
+
+These files are deliberately NOT stored in the FerrumPix-Models repository or
+in its releases. The ONNX model alone is 873 MB. FerrumPix downloads the three
+files only after the user requests them, directly from this version-pinned
+publisher release:
+
+  https://huggingface.co/anakhiu/ram-plus-onnx-int8/tree/f5226bd4d7667a08fe475b95dcf0be66c86aa4fb
+
+Origin and transformation chain
+-------------------------------
+  Original RAM++ project and weights:
+    https://github.com/xinyu1205/recognize-anything
+    https://huggingface.co/xinyu1205/recognize-anything-plus-model
+
+  FP32 ONNX export used by the publisher:
+    https://github.com/CannotFindObject/RAM_ONNX
+
+  Dynamic INT8 conversion and the distributed files:
+    https://huggingface.co/anakhiu/ram-plus-onnx-int8
+
+The publisher describes this as a dynamic INT8 quantization of the FP32 ONNX
+export. No model was trained or modified by FerrumPix or by the
+FerrumPix-Models repository. The tag list contains 4,585 entries; the threshold
+list belongs to that exact output ordering and must always travel with the
+model.
+
+Licence
+-------
+Apache License 2.0. The original RAM++ project, the cited ONNX export and the
+INT8 conversion are published under Apache-2.0. The complete licence text is
+reproduced in LICENSE.Apache-2.0.txt in this folder.
+
+Integrity
+---------
+FerrumPix pins the publisher revision above and verifies each downloaded file
+against a SHA-256 checksum compiled into the application. A model or companion
+file that does not match is not used.
