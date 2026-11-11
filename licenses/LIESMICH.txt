@@ -21,6 +21,11 @@ werden, egal wo sie herkommen:
   nafnet-v1.onnx              MIT          LICENSE.MIT.nafnet.txt
                                            NOTICE-nafnet.txt
 
+  treenet-v1.onnx             MIT          LICENSE.MIT.rawforge.txt
+                              Trainingsdaten RawNIND, CC BY-SA 4.0:
+                                           LICENSE.CC-BY-SA-4.0.txt
+                                           NOTICE-treenet.txt
+
   realesrgan-x4-v1.onnx       BSD-3-Clause LICENSE.BSD-3-Clause.realesrgan.txt
   realesrgan-x2-v1.onnx                    NOTICE-realesrgan.txt
   realesrgan-fast-x4-v1.onnx

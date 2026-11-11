@@ -1,0 +1,61 @@
+TreeNet (RawForge)
+==================
+
+File in this repository: treenet-v1.onnx
+
+Origin
+------
+The "heavy" denoising model of RawForge, a raw-image denoiser.
+
+  Original work:  https://github.com/rymuelle/RawForge
+  Source file:    ShadowWeightedL1_24_deep_500.onnx from the release
+                  onnx_v1.0.0 of that repository (published 2026-04-17)
+  Conversion:     done for FerrumPix: every float16 tensor of the published
+                  file (weights, constants, cast targets, inputs and outputs)
+                  was widened to float32. No retraining, no change to any
+                  weight beyond that widening.
+
+Why the conversion: in half precision the published file returned only zeros
+on a WebGPU graphics card for tiles of 256 pixels and more, while it was right
+on the processor. The float32 file computes the same on both and is not
+slower. The conversion script is FerrumPix's
+packaging/Diagnostics/TreeNetMessung/nach_fp32.py.
+
+License
+-------
+MIT, Copyright (c) 2025 rymuelle. The full license text is in
+LICENSE.MIT.rawforge.txt in this folder.
+
+Training data
+-------------
+The model was trained on RawNIND, the Raw Natural Image Noise Dataset
+(Benoit Brummer and Christophe De Vleeschouwer, UCLouvain):
+
+  https://doi.org/10.14428/DVN/DEQCIM
+
+RawNIND is licensed under Creative Commons Attribution-ShareAlike 4.0
+International (CC BY-SA 4.0); the license text is in
+LICENSE.CC-BY-SA-4.0.txt in this folder. It is named here as the source of the
+training data. Whether the ShareAlike condition extends to weights trained on
+the data is not settled; these weights are therefore not placed under any
+license other than the one they were published with.
+
+Model contract
+--------------
+  Input   "input"   float32 [batch, 3, H, W]  linear Rec.2020 RGB from the raw
+                    file after white balance and demosaicing, white at 1,
+                    clipped to 0..1
+  Input   "cond"    float32 [batch, 1]        ISO / 6400
+  Output  "output"  float32 [batch, 3, H, W]  linear Rec.2020 RGB
+
+H and W are free; FerrumPix uses tiles of 512 (256 on cards with less than
+4 GB), overlapping by 32 pixels and blended linearly across the overlap.
+There is no strength parameter beyond the ISO; FerrumPix blends the result
+against the input in brightness only.
+
+FerrumPix uses it for Bayer and for Fujifilm X-Trans sensors: it gets the
+data after demosaicing, and on X-Trans files it measured as well as on Bayer
+files. RawForge's separate X-Trans models are not part of this collection.
+
+The SHA-256 in SHA256SUMS.txt identifies exactly this converted file:
+  8e689c4c0f9d21c4730d719c0bbdb6432368559e0707bd01ba74ddf3a90d1f5c

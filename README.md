@@ -20,6 +20,7 @@ licence of the project it came from:
 | `lama-v1.onnx` | [LaMa](https://github.com/advimman/lama) | Apache-2.0 | `licenses/LICENSE.Apache-2.0.txt`, `licenses/NOTICE-lama.txt` |
 | `scunet-v1.onnx` | [SCUNet](https://github.com/cszn/SCUNet) | Apache-2.0 | `licenses/LICENSE.Apache-2.0.txt`, `licenses/NOTICE-scunet.txt` |
 | `nafnet-v1.onnx` | [NAFNet](https://github.com/megvii-research/NAFNet) | MIT | `licenses/LICENSE.MIT.nafnet.txt`, `licenses/NOTICE-nafnet.txt` |
+| `treenet-v1.onnx` | [RawForge](https://github.com/rymuelle/RawForge), trained on [RawNIND](https://doi.org/10.14428/DVN/DEQCIM) | MIT (data: CC BY-SA 4.0) | `licenses/LICENSE.MIT.rawforge.txt`, `licenses/LICENSE.CC-BY-SA-4.0.txt`, `licenses/NOTICE-treenet.txt` |
 | `realesrgan-x4-v1.onnx` | [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) | BSD-3-Clause | `licenses/LICENSE.BSD-3-Clause.realesrgan.txt`, `licenses/NOTICE-realesrgan.txt` |
 | `realesrgan-x2-v1.onnx` | Real-ESRGAN | BSD-3-Clause | `licenses/LICENSE.BSD-3-Clause.realesrgan.txt`, `licenses/NOTICE-realesrgan.txt` |
 | `realesrgan-fast-x4-v1.onnx` | Real-ESRGAN | BSD-3-Clause | `licenses/LICENSE.BSD-3-Clause.realesrgan.txt`, `licenses/NOTICE-realesrgan.txt` |
@@ -76,11 +77,12 @@ LaMa's weights are the "big-lama" checkpoint the upstream README names as its ow
 download. The notice file records the full chain: original project, weights, and
 the ONNX export this copy came from.
 
-The two denoising files are not two versions of one thing. They do the same job
-at different prices: SCUNet keeps more of the faint drawing in a picture, NAFNet
-runs about six times faster and is a little smoother. Turning one down does not
-turn it into the other, which is why both are here rather than one. Their notice
-files carry the measured comparison.
+In current FerrumPix versions the raw denoiser `treenet-v1.onnx` denoises raw
+files, on their linear data before exposure and tone curve; in a measured
+series of raw files it shifted colours the least and kept the most detail.
+`nafnet-v1.onnx` stays for finished pictures such as JPEGs, which it was trained
+on. `scunet-v1.onnx` is no longer used and stays in the release only because
+older FerrumPix versions still fetch it.
 
 The five enlargers are not versions of one thing either. Each was trained on a
 different kind of picture, and that is what you see in the result. Which one
@@ -89,6 +91,9 @@ here.
 
 The CC BY licence on the place table asks for something the others do not:
 whoever passes that file on names GeoNames as its source.
+The training data of `treenet-v1.onnx`, RawNIND, is CC BY-SA 4.0; it is named
+as the source in the notice file, and the weights keep the MIT licence they
+were published with.
 
 Every licence in this collection permits redistribution — which is exactly why
 ArcFace is *not* in it. Whoever passes one of these files on
@@ -118,6 +123,10 @@ against one checksum, which is also why its SHA-256 differs from the source.
 `nafnet-v1.onnx` was exported to ONNX for FerrumPix from the upstream
 NAFNet-SIDD-width32 checkpoint, without retraining and without altering a
 weight.
+
+`treenet-v1.onnx` is RawForge's published "heavy" model with every float16
+tensor widened to float32. In half precision it returned only zeros on a WebGPU
+graphics card; nothing else was changed. The notice file has the details.
 
 The five `realesrgan-*` files were exported to ONNX here from the author's own
 published weights, without retraining and without altering a weight. Each export
