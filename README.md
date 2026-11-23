@@ -16,7 +16,8 @@ licence of the project it came from:
 |---|---|---|---|
 | `mobilesam-encoder-v1.onnx` | [MobileSAM](https://github.com/ChaoningZhang/MobileSAM) | Apache-2.0 | `licenses/LICENSE.Apache-2.0.txt`, `licenses/NOTICE-mobilesam.txt` |
 | `mobilesam-decoder-v1.onnx` | [MobileSAM](https://github.com/ChaoningZhang/MobileSAM) | Apache-2.0 | `licenses/LICENSE.Apache-2.0.txt`, `licenses/NOTICE-mobilesam.txt` |
-| `midas-small-v1.onnx` | [MiDaS](https://github.com/isl-org/MiDaS) | MIT | `licenses/LICENSE.MIT.midas.txt`, `licenses/NOTICE-midas.txt` |
+| `depth-anything-v2-small-v1.onnx` | [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2), small | Apache-2.0 | `licenses/LICENSE.Apache-2.0.txt`, `licenses/NOTICE-depth-anything.txt` |
+| `midas-small-v1.onnx` | [MiDaS](https://github.com/isl-org/MiDaS), kept for older FerrumPix versions | MIT | `licenses/LICENSE.MIT.midas.txt`, `licenses/NOTICE-midas.txt` |
 | `lama-v1.onnx` | [LaMa](https://github.com/advimman/lama) | Apache-2.0 | `licenses/LICENSE.Apache-2.0.txt`, `licenses/NOTICE-lama.txt` |
 | `scunet-v1.onnx` | [SCUNet](https://github.com/cszn/SCUNet) | Apache-2.0 | `licenses/LICENSE.Apache-2.0.txt`, `licenses/NOTICE-scunet.txt` |
 | `nafnet-v1.onnx` | [NAFNet](https://github.com/megvii-research/NAFNet) | MIT | `licenses/LICENSE.MIT.nafnet.txt`, `licenses/NOTICE-nafnet.txt` |
@@ -171,7 +172,7 @@ checks their checksum.
 | Feature | Files | Together |
 |---|---|---|
 | Select an object by clicking it (mask tool) | `mobilesam-encoder-v1.onnx`, `mobilesam-decoder-v1.onnx` | 42 MiB |
-| Depth mask and depth blur | `midas-small-v1.onnx` | 63 MiB |
+| Depth mask, depth blur and depth fog | `depth-anything-v2-small-v1.onnx` | 94 MiB |
 | Remove an object | `lama-v1.onnx` | 105 MiB |
 | Denoise a photo, thorough | `scunet-v1.onnx` | 73 MiB |
 | Denoise a photo, quick | `nafnet-v1.onnx` | 113 MiB |

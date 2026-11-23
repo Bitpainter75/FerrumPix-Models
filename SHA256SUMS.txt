@@ -13,3 +13,4 @@ c37a9de8d7b92e4fb3705b5d305080d10a2ada8fd2dd8ce25e37c26cf9d89042  realesrgan-x2-
 d92d4628a6f570a8686fa9f8b0180c712fa36b04209ce0752949fac3cd760242  realesrgan-fast-x4-v1.onnx
 abc25fa980e4cc60ddef472f37e61b5e788831f01a8087cc4af596b4c73d5a40  realesrgan-fast-wdn-x4-v1.onnx
 9d094b3efa58f18f10e7eec7acd6f9ee534d4ccd50ba265c599cd6e99549bfea  realesrgan-anime-x4-v1.onnx
+afb6a5c28f3b6bf1618c6e43f02073ef9dfdc70e937502d51603e57b0a1df10c  depth-anything-v2-small-v1.onnx
